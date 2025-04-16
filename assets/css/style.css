@@ -3,28 +3,28 @@
 
 @font-face {
     font-family: 'Exposure'; /* Name of the font */
-    src: url('/assets/fonts/ExposureRegular.otf') format('opentype'); /* Adjust the path and format */
+    src: url('/website/assets/fonts/ExposureRegular.otf') format('opentype');
     font-weight: normal; /* Adjust as needed */
     font-style: normal; /* Adjust as needed */
 }
 
 @font-face {
     font-family: 'Exposure'; /* Name of the font */
-    src: url('/assets/fonts/ExposureItalic.otf') format('opentype'); /* Adjust the path and format */
+    src: url('/website/assets/fonts/ExposureItalic.otf') format('opentype');
     font-weight: bold; /* Adjust as needed */
     font-style: normal; /* Adjust as needed */
 }
 
 @font-face {
     font-family: 'SuisseIntl';
-    src: url('/assets/fonts/SuisseIntl-Regular.otf') format('opentype');
+    src: url('/website/assets/fonts/SuisseIntl-Regular.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'SuisseIntlmono';
-    src: url('/assets/fonts/SuisseIntlMono-Regular.otf') format('opentype');
+    src: url('/website/assets/fonts/SuisseIntlMono-Regular.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
@@ -36,14 +36,12 @@
 }
 
 body {
-    font-family: 'SuisseIntl', Arial, sans-serif;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f4f4f4;
-    color: #2d2d2d;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;
-  
+    color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 
@@ -93,49 +91,61 @@ a:hover {
 
 /* Titles text on the frontpage */
 .main-title {
-    margin-bottom: 10px; /* Reduce space below the main title */
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.title-normal {
+    font-weight: normal;
+}
+
+.title-bold {
+    font-weight: bold;
 }
 
 .intro-text-container {
-    width: 60%; /* Set the width to 70% of the parent container */
-    margin: 0; /* Center the container horizontally */
-    text-align: left; /* Optional: Center the text within the container */
+    margin-bottom: 40px;
 }
 
-/* Intro text on the frontpage */
 .intro-text {
-    margin-top: 0; /* Remove space above the paragraph */
-    margin-bottom: 40px; /* Adjust space below the paragraph */
-    font-size: 1.1em;
-    line-height: 1.4;
-    letter-spacing: 0;
-
+    font-size: 1.2em;
+    color: #555;
 }
 
 /* The grid in the frontpage */
 .post-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns */
-    gap: 20px; /* Space between grid items */
-    margin-top: 20px; /* Space above the grid */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
 }
 
 .post-item {
-   
-    padding: 10px; /* Add padding inside each item */
-    text-align: left; /* Center the text */
-    min-height: 400px; /* Set a minimum height for each grid item */
-    display: flex; /* Use flexbox to center content vertically */
-    flex-direction: column; /* Align content in a column */
-    justify-content: top; /* Center content vertically */
+    border: 1px solid #eee;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
+.post-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
 
 .post-thumbnail {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 10px; /* Space between image and title */
-}  
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.post-title-container {
+    padding: 15px;
+}
+
+.post-title {
+    margin: 0;
+    font-size: 1.4em;
+    line-height: 1.2;
+}
 
 .subtitle-separator {
     font-family: 'SuisseIntlmono', Arial, sans-serif;
@@ -156,15 +166,14 @@ hr {
 }
 
 .about-link {
-    font-family: 'Exposure', Arial, sans-serif;
-    font-weight: normal;
-    font-size: 1.1em;
-    color: #2d2d2d;
     text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 5px 10px;
 }
 
 .about-link.active {
-    text-decoration: underline;
+    border-bottom: 2px solid #333;
 }
 
 .about-link:hover {
@@ -176,23 +185,23 @@ hr {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 900px; /* Match your container width */
-    margin: 0 auto;
-    padding: 20px 0; /* Add some vertical padding */
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 30px;
+}
+
+.logo {
+    height: 30px;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    body {
-        padding: 15px;
+    .post-grid {
+        grid-template-columns: 1fr;
     }
-}
-
-/* Media query for mobile devices */
-@media (max-width: 768px) {
-    .intro-text-container {
-        width: 100%; /* Full width on mobile devices */
-        margin: 0 auto; /* Center the container horizontally */
+    
+    .main-title {
+        font-size: 2em;
     }
 }
 

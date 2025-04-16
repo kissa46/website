@@ -26,10 +26,10 @@
 
     <div class="header">
         <a href="{{ '/' | relative_url }}">
-            <img src="/assets/images/logo-2.png" alt="Logo" class="logo" /> 
+            <img src="{{ '/assets/images/logo-2.png' | relative_url }}" alt="Logo" class="logo" /> 
         </a>
         <div>
-            <a href="/about" class="about-link {% if page.url contains '/about' %}active{% endif %}">About</a>
+            <a href="{{ '/about' | relative_url }}" class="about-link {% if page.url contains '/about' %}active{% endif %}">About</a>
         </div>
     </div>
 
