@@ -1,0 +1,100 @@
+---
+layout: default
+---
+
+<style>
+  .post-container {
+    max-width: 600px; /* Adjust the width for the text section */
+    margin: 0 auto; /* Center the container */
+    text-align: left; /* Align text to the left */
+    margin-top: 80px;
+  }
+
+  .title-container {
+    max-width: 800px; /* Wider width for the title section */
+    margin: 0 auto; /* Center the title container */
+    text-align: center; /* Center the title text */
+    margin-top: 80px;
+  }
+
+  .intro-container {
+    max-width: 600px; /* Wider width for the title section */
+    margin: 0 auto; /* Center the title container */
+    text-align: center; /* Center the title text */
+  }
+
+
+  .title-normal {
+    font-family: 'Exposure', sans-serif; /* Use the custom font */
+    font-weight: normal; /* Normal weight */
+    margin-bottom: 5px; /* Remove bottom margin */
+    line-height: 1; /* Adjust line height to reduce space */
+    display: block;
+  }
+
+  .title-bold {
+    font-family: 'Exposure', sans-serif; /* Use the custom font */
+    font-weight: bold; /* Bold weight */
+    margin-top: 0; /* Remove top margin */
+    line-height: 1; /* Adjust line height to reduce space */
+    display: block;
+  }
+
+  .intro {
+    font-family: 'SuisseIntl', Arial, sans-serif; /* Use the custom font for intro text */
+    font-size: 1.1em; /* Adjust the size as needed */ 
+    margin-bottom: 20px; /* Add space after the intro */
+    text-align: center;
+    line-height: 1.4;
+}
+
+.post-meta {
+    font-family: 'SuisseIntlmono', Arial,sans-serif; /* Use a different font for meta information */
+    font-size: 0.9em; /* Smaller font size for meta information */
+    color: #666; /* Optional: Change meta text color */
+    text-align: center; /* Center the text */
+    margin-bottom: 20px; /* Add space after the meta information */
+    text-transform: uppercase;
+}
+
+.image-container {
+    width: 100%; /* Full width of the parent container */
+    margin: 0 20px; /* Negative margin to extend beyond the post-container */
+    overflow: hidden; /* Ensure no overflow issues */
+    margin-top: 60px;
+}
+
+.post-image {
+    width: 100%; /* Make the image take the full width of the image container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+</style>
+
+<div class="title-container">
+  <h1>
+    <span class="title-normal">{{ page.title-up }}</span>
+    <span class="title-bold">{{ page.title-down }}</span>
+  </h1>
+</div>
+
+<div class="intro-container">
+  {% if page.intro %}
+    <p class="intro">{{ page.intro }}</p>
+  {% endif %}
+  <div class="post-meta">
+    <p>{{ page.categories | join: ', ' }} | {{ page.date | date: "%B %d, %Y" }}</p>
+  </div>
+</div>
+
+<div class="image-container">
+    {% if page.image %}
+      <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="post-image">
+    {% endif %}
+  </div>
+
+  <div class="post-container">
+    <div>
+      {{ content }}
+    </div>
+  </div>

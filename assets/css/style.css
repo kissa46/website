@@ -1,0 +1,263 @@
+/* Global Styles */
+
+
+@font-face {
+    font-family: 'Exposure'; /* Name of the font */
+    src: url('/assets/fonts/ExposureRegular.otf') format('opentype'); /* Adjust the path and format */
+    font-weight: normal; /* Adjust as needed */
+    font-style: normal; /* Adjust as needed */
+}
+
+@font-face {
+    font-family: 'Exposure'; /* Name of the font */
+    src: url('/assets/fonts/ExposureItalic.otf') format('opentype'); /* Adjust the path and format */
+    font-weight: bold; /* Adjust as needed */
+    font-style: normal; /* Adjust as needed */
+}
+
+@font-face {
+    font-family: 'SuisseIntl';
+    src: url('/assets/fonts/SuisseIntl-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SuisseIntlmono';
+    src: url('/assets/fonts/SuisseIntlMono-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+.post-meta p {
+    margin: 0; /* Remove default margin */
+    display: inline-block; /* Ensure the text is inline */
+}
+
+body {
+    font-family: 'SuisseIntl', Arial, sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    color: #2d2d2d;
+    line-height: 1.6;
+  
+}
+
+
+h1 {
+    font-family: 'Exposure', sans-serif; /* Use the custom font for titles */
+    font-size: 3.2em; /* Adjust the size as needed (e.g., 2.5em) */
+    color: #2d2d2d; /* Optional: Change title color if needed */
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: 'Exposure', sans-serif; /* Use the custom font for titles */
+    font-style: normal;
+    color: #2d2d2d; /* Optional: Change title color if needed */
+}
+
+p {
+    margin-bottom: 2em; /* Increase the bottom margin to create a larger gap */
+    line-height: 1.8; /* Ensure line height is set for readability */
+    letter-spacing: 0.02em;
+}
+
+ul {
+    /* Remove this line completely */
+    /* padding: 0; */
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Light/Dark Mode */
+:root {
+    --bg: #ffffff;
+    --text: #222;
+}
+
+.dark-mode {
+    --bg: #121212;
+    --text: #ddd;
+}
+
+
+/* Titles text on the frontpage */
+.main-title {
+    margin-bottom: 10px; /* Reduce space below the main title */
+}
+
+.intro-text-container {
+    width: 60%; /* Set the width to 70% of the parent container */
+    margin: 0; /* Center the container horizontally */
+    text-align: left; /* Optional: Center the text within the container */
+}
+
+/* Intro text on the frontpage */
+.intro-text {
+    margin-top: 0; /* Remove space above the paragraph */
+    margin-bottom: 40px; /* Adjust space below the paragraph */
+    font-size: 1.1em;
+    line-height: 1.4;
+    letter-spacing: 0;
+
+}
+
+/* The grid in the frontpage */
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 20px; /* Space between grid items */
+    margin-top: 20px; /* Space above the grid */
+}
+
+.post-item {
+   
+    padding: 10px; /* Add padding inside each item */
+    text-align: left; /* Center the text */
+    min-height: 400px; /* Set a minimum height for each grid item */
+    display: flex; /* Use flexbox to center content vertically */
+    flex-direction: column; /* Align content in a column */
+    justify-content: top; /* Center content vertically */
+}
+
+
+.post-thumbnail {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px; /* Space between image and title */
+}  
+
+.subtitle-separator {
+    font-family: 'SuisseIntlmono', Arial, sans-serif;
+    font-size: 1em;
+    color: #2d2d2d;
+    text-align: left;
+    text-transform: uppercase;
+    margin-bottom: 0.2em;
+    margin-top: 4em;
+    letter-spacing: 0.1em; /* Add space between letters */
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: black;
+    margin-bottom: 2em;
+}
+
+.about-link {
+    font-family: 'Exposure', Arial, sans-serif;
+    font-weight: normal;
+    font-size: 1.1em;
+    color: #2d2d2d;
+    text-decoration: none;
+}
+
+.about-link.active {
+    text-decoration: underline;
+}
+
+.about-link:hover {
+    text-decoration: underline;
+}
+
+/* Add styles for the header to ensure proper layout */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 900px; /* Match your container width */
+    margin: 0 auto;
+    padding: 20px 0; /* Add some vertical padding */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+    .intro-text-container {
+        width: 100%; /* Full width on mobile devices */
+        margin: 0 auto; /* Center the container horizontally */
+    }
+}
+
+.about-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.about-content {
+    margin-top: 2em;
+}
+
+.work-experience {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.work-experience li {
+    display: grid;
+    grid-template-columns: 180px 180px 100px; /* Fixed widths for all columns */
+    gap: 40px;
+    margin-bottom: 1.5em;
+    font-family: 'SuisseIntl', Arial, sans-serif;
+    font-size: 1em;
+    color: #2d2d2d;
+    align-items: start;
+}
+
+.work-role {
+    font-weight: italic;
+}
+
+.work-company {
+    color: #2d2d2d;
+    justify-self: start; /* Align company names to the start of their column */
+}
+
+.work-period {
+    color: #2d2d2d;
+    font-family: 'SuisseIntl', Arial, sans-serif;
+    text-align: right;
+    justify-self: end;
+}
+
+.contact-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-links li {
+    margin-bottom: 1em;
+}
+
+.contact-links a {
+    font-family: 'SuisseIntl', Arial, sans-serif;
+    color: #2d2d2d;
+    text-decoration: none;
+}
+
+.contact-links a:hover {
+    text-decoration: underline;
+}
+
+
+

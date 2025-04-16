@@ -1,0 +1,52 @@
+---
+layout: default
+title: Home
+---
+
+<style>
+
+  .title-normal {
+    font-family: 'Exposure', sans-serif; /* Use the custom font */
+    font-weight: normal; /* Normal weight */
+}
+
+.title-bold {
+    font-family: 'Exposure', sans-serif; /* Use the custom font */
+    font-weight: bold; /* Bold weight */
+  }
+
+  .post-title {
+    font-family: 'Exposure', sans-serif; /* Use the custom font */
+    font-weight: normal; /* Normal weight */
+    font-size: 1.4em;
+    line-height: 1.2;
+    margin-top: 0;
+  }
+
+</style>
+
+<h1 class="main-title">
+  <span class="title-normal">Welcome to </span>
+  <span class="title-bold">My Website</span>
+</h1>
+
+<div class="intro-text-container">
+<p class="intro-text">Take an inside look at my work, personal projects, and occasional thoughts on things that matter to me.</p>
+</div>
+
+
+
+<div class="post-grid">
+  {% for post in site.posts %}
+    <div class="post-item">
+      <a href="{{ post.url | relative_url }}">
+        {% if post.image %}
+          <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="post-thumbnail">
+        {% endif %}
+        <div class="post-title-container">
+          <h2 class="post-title">{{ post.title }}</h2>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</div>

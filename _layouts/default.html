@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body class="light-mode">
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between; /* Space between logo and toggle button */
+            align-items: center; /* Center items vertically */
+            padding: 10px; /* Add some padding */
+        }
+
+        .logo {
+            height: 20px; /* Adjust height as needed */
+        }
+
+        .toggle-button {
+            cursor: pointer; /* Change cursor to pointer for better UX */
+        }
+    </style>
+
+    <div class="header">
+        <a href="{{ '/' | relative_url }}">
+            <img src="/assets/images/logo-2.png" alt="Logo" class="logo" /> 
+        </a>
+        <div>
+            <a href="/about" class="about-link {% if page.url contains '/about' %}active{% endif %}">About</a>
+        </div>
+    </div>
+
+    <main>
+        {{ content }}
+    </main>
+    {% include footer.html %}
+</body>
+</html>
