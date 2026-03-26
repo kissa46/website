@@ -3,30 +3,38 @@
 
 @font-face {
     font-family: 'Exposure'; /* Name of the font */
-    src: url('/website/assets/fonts/ExposureRegular.otf') format('opentype');
+    src: url('../fonts/ExposureRegular.otf') format('opentype');
     font-weight: normal; /* Adjust as needed */
     font-style: normal; /* Adjust as needed */
 }
 
 @font-face {
     font-family: 'Exposure'; /* Name of the font */
-    src: url('/website/assets/fonts/ExposureItalic.otf') format('opentype');
+    src: url('../fonts/ExposureItalic.otf') format('opentype');
     font-weight: bold; /* Adjust as needed */
     font-style: normal; /* Adjust as needed */
 }
 
 @font-face {
     font-family: 'SuisseIntl';
-    src: url('/website/assets/fonts/SuisseIntl-Regular.otf') format('opentype');
+    src: url('../fonts/SuisseIntl-Regular.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'SuisseIntlmono';
-    src: url('/website/assets/fonts/SuisseIntlMono-Regular.otf') format('opentype');
+    src: url('../fonts/SuisseIntlMono-Regular.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
+}
+
+@font-face {
+    font-family: 'IBMPlexSans';
+    src: url('../fonts/IBMPlexSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 
@@ -38,29 +46,48 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;
-    color: #333;
+    color: #1f1f1f;
+    background-color: #efefef;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+/* Subtle grain: SVG fractal noise tiles (feTurbulence); sits under page content. */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
 }
 
 
 h1 {
     font-family: 'Exposure', sans-serif; /* Use the custom font for titles */
     font-size: 3.2em; /* Adjust the size as needed (e.g., 2.5em) */
-    color: #2d2d2d; /* Optional: Change title color if needed */
+    color: #1f1f1f;
 }
 
 h2, h3, h4, h5, h6 {
     font-family: 'Exposure', sans-serif; /* Use the custom font for titles */
+    font-weight: bold;
     font-style: normal;
-    color: #2d2d2d; /* Optional: Change title color if needed */
+    color: #1f1f1f;
 }
 
 p {
-    margin-bottom: 2em; /* Increase the bottom margin to create a larger gap */
     line-height: 1.8; /* Ensure line height is set for readability */
     letter-spacing: 0.02em;
+}
+
+strong {
+    color: #1f1f1f;
+    font-weight: bold;
 }
 
 ul {
@@ -70,7 +97,7 @@ ul {
 
 a {
     color: inherit;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 a:hover {
@@ -104,53 +131,140 @@ a:hover {
 }
 
 .intro-text-container {
-    margin-bottom: 40px;
+    margin-bottom: 4.5rem;
 }
 
 .intro-text {
-    font-size: 1.2em;
-    color: #555;
+    font-family: 'IBMPlexSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 2em;
+    line-height: 1.6;
+    color: #1f1f1f;
 }
 
-/* The grid in the frontpage */
-.post-grid {
+/* Blog post: article body (IBM Plex Sans like home intro) */
+.post-container {
+    max-width: 600px;
+    margin: 80px auto 80px;
+    text-align: left;
+}
+
+.post-container p,
+.post-container li {
+    font-family: 'IBMPlexSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.image-container + .post-container {
+    margin-top: 1.75rem;
+}
+
+/* Homepage project grid: 1 column mobile, 3 columns desktop */
+.post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: 1fr;
+    row-gap: 2.25rem;
+    column-gap: 1.25rem;
+}
+
+@media (min-width: 769px) {
+    .post-list {
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 3rem;
+        row-gap: 3rem;
+    }
 }
 
 .post-item {
-    border: 1px solid #eee;
-    border-radius: 5px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-}
-
-.post-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-
-.post-thumbnail {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.post-title-container {
-    padding: 15px;
-}
-
-.post-title {
     margin: 0;
-    font-size: 1.4em;
-    line-height: 1.2;
+}
+
+.post-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.post-card-inner {
+    position: relative;
+    aspect-ratio: 3.5 / 5;
+    background-color: #d8d8d8;
+    overflow: hidden;
+}
+
+.post-card-image,
+.post-card-placeholder {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.post-card-image {
+    object-fit: cover;
+    display: block;
+    transform: scale(1);
+    transition: transform 0.45s ease;
+}
+
+.post-card:hover .post-card-image {
+    transform: scale(1.03);
+}
+
+.post-card-placeholder {
+    background: linear-gradient(145deg, #c8c8c8 0%, #e4e4e4 100%);
+}
+
+/* Title first, intro below; block anchored to bottom of card */
+.post-card-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 46%;
+    padding: 0.75rem 1rem 1.35rem;
+    box-sizing: border-box;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.45) 55%, transparent 100%);
+}
+
+.post-card-title {
+    margin: 0;
+    font-family: 'Exposure', sans-serif;
+    font-size: 1.2em;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1.15;
+    color: #fafafa;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.post-card-intro {
+    margin: 0.5rem 0 0;
+    min-height: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    font-family: 'IBMPlexSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 0.78em;
+    font-weight: 400;
+    line-height: 1.4;
+    color: rgba(250, 250, 250, 0.88);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
 .subtitle-separator {
     font-family: 'SuisseIntlmono', Arial, sans-serif;
     font-size: 1em;
-    color: #2d2d2d;
+    color: #f0eee6;
     text-align: left;
     text-transform: uppercase;
     margin-bottom: 0.2em;
@@ -161,19 +275,15 @@ a:hover {
 hr {
     border: 0;
     height: 1px;
-    background-color: black;
+    background-color: #f0eee6;
     margin-bottom: 2em;
 }
 
 .about-link {
     text-decoration: none;
-    color: #333;
+    color: #f0eee6;
     font-weight: 500;
     padding: 5px 10px;
-}
-
-.about-link.active {
-    border-bottom: 2px solid #333;
 }
 
 .about-link:hover {
@@ -183,25 +293,62 @@ hr {
 /* Add styles for the header to ensure proper layout */
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 20px 0;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+}
+
+.header-wrapper {
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.header-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    text-decoration: none;
+}
+
+.header-back-icon {
+    display: block;
+    width: 1.2rem;
+    height: 1.2rem;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.header-back,
+.header-back:link,
+.header-back:visited,
+.header-back:hover,
+.header-back:active {
+    color: #1f1f1f;
 }
 
 .logo {
-    height: 30px;
+    height: 20px;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .post-grid {
-        grid-template-columns: 1fr;
-    }
-    
     .main-title {
         font-size: 2em;
+    }
+
+    .post-card-caption {
+        min-height: 48%;
+        padding: 0.65rem 0.9rem 1.15rem;
+    }
+
+    .post-card-intro {
+        font-size: 0.75em;
+        -webkit-line-clamp: 3;
     }
 }
 
@@ -228,7 +375,7 @@ hr {
     margin-bottom: 1.5em;
     font-family: 'SuisseIntl', Arial, sans-serif;
     font-size: 1em;
-    color: #2d2d2d;
+    color: #f0eee6;
     align-items: start;
 }
 
@@ -237,12 +384,12 @@ hr {
 }
 
 .work-company {
-    color: #2d2d2d;
+    color: #f0eee6;
     justify-self: start; /* Align company names to the start of their column */
 }
 
 .work-period {
-    color: #2d2d2d;
+    color: #f0eee6;
     font-family: 'SuisseIntl', Arial, sans-serif;
     text-align: right;
     justify-self: end;
@@ -260,7 +407,7 @@ hr {
 
 .contact-links a {
     font-family: 'SuisseIntl', Arial, sans-serif;
-    color: #2d2d2d;
+    color: #f0eee6;
     text-decoration: none;
 }
 

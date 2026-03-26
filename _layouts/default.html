@@ -7,35 +7,26 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body class="light-mode">
-    <style>
-        .header {
-            display: flex;
-            justify-content: space-between; /* Space between logo and toggle button */
-            align-items: center; /* Center items vertically */
-            padding: 10px; /* Add some padding */
-        }
-
-        .logo {
-            height: 20px; /* Adjust height as needed */
-        }
-
-        .toggle-button {
-            cursor: pointer; /* Change cursor to pointer for better UX */
-        }
-    </style>
-
     <div class="header">
-        <a href="{{ '/' | relative_url }}">
-            <img src="{{ '/assets/images/logo-2.png' | relative_url }}" alt="Logo" class="logo" /> 
-        </a>
-        <div>
-            <a href="{{ '/about' | relative_url }}" class="about-link {% if page.url contains '/about' %}active{% endif %}">About</a>
+        <div class="header-wrapper">
+            {% if page.url != "/" %}
+                <a href="{{ '/' | relative_url }}" class="header-back" aria-label="Back">
+                    <svg class="header-back-icon" width="16" height="16" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" shape-rendering="crispEdges">
+                        <rect x="3" y="0" width="2" height="1" fill="currentColor"/>
+                        <rect x="2" y="1" width="2" height="1" fill="currentColor"/>
+                        <rect x="1" y="2" width="2" height="1" fill="currentColor"/>
+                        <rect x="0" y="3" width="2" height="1" fill="currentColor"/>
+                        <rect x="1" y="4" width="2" height="1" fill="currentColor"/>
+                        <rect x="2" y="5" width="2" height="1" fill="currentColor"/>
+                        <rect x="3" y="6" width="2" height="1" fill="currentColor"/>
+                    </svg>
+                </a>
+            {% endif %}
         </div>
     </div>
 
     <main>
         {{ content }}
     </main>
-    {% include footer.html %}
 </body>
 </html>

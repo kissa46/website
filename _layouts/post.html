@@ -3,13 +3,6 @@ layout: default
 ---
 
 <style>
-  .post-container {
-    max-width: 600px; /* Adjust the width for the text section */
-    margin: 0 auto; /* Center the container */
-    text-align: left; /* Align text to the left */
-    margin-top: 80px;
-  }
-
   .title-container {
     max-width: 800px; /* Wider width for the title section */
     margin: 0 auto; /* Center the title container */
@@ -46,22 +39,22 @@ layout: default
     margin-bottom: 20px; /* Add space after the intro */
     text-align: center;
     line-height: 1.4;
+    color: #1f1f1f;
 }
 
 .post-meta {
     font-family: 'SuisseIntlmono', Arial,sans-serif; /* Use a different font for meta information */
     font-size: 0.9em; /* Smaller font size for meta information */
-    color: #666; /* Optional: Change meta text color */
+    color: #1f1f1f;
     text-align: center; /* Center the text */
     margin-bottom: 20px; /* Add space after the meta information */
     text-transform: uppercase;
 }
 
 .image-container {
-    width: 100%; /* Full width of the parent container */
-    margin: 0 20px; /* Negative margin to extend beyond the post-container */
-    overflow: hidden; /* Ensure no overflow issues */
-    margin-top: 60px;
+    max-width: 600px; /* Match the text block width */
+    margin: 60px auto 0 auto; /* Center it and add top margin */
+    overflow: hidden;
 }
 
 .post-image {
@@ -73,8 +66,12 @@ layout: default
 
 <div class="title-container">
   <h1>
-    <span class="title-normal">{{ page.title-up }}</span>
-    <span class="title-bold">{{ page.title-down }}</span>
+    {% if page.title-up or page.title-down %}
+      <span class="title-normal">{{ page.title-up }}</span>
+      <span class="title-bold">{{ page.title-down }}</span>
+    {% else %}
+      <span class="title-bold">{{ page.title }}</span>
+    {% endif %}
   </h1>
 </div>
 
@@ -83,15 +80,15 @@ layout: default
     <p class="intro">{{ page.intro }}</p>
   {% endif %}
   <div class="post-meta">
-    <p>{{ page.categories | join: ', ' }} | {{ page.date | date: "%B %d, %Y" }}</p>
+    <p>{{ page.date | date: "%B %d, %Y" }}</p>
   </div>
 </div>
 
+{% if page.image %}
 <div class="image-container">
-    {% if page.image %}
-      <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="post-image">
-    {% endif %}
-  </div>
+  <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="post-image">
+</div>
+{% endif %}
 
   <div class="post-container">
     <div>

@@ -1,56 +1,35 @@
 ---
 layout: post
-title: "Yatzy Scoreboard Tracker: Automating the Fun with AI"
-title-up: "Yatzy Scoreboard Tracker:"
-title-down: "Automating the Fun with AI"
-intro: "Yatzy is a classic dice game, often played in social settings where players try to achieve various combinations with five dice"
-date: 2025-03-06
-categories: [coding]
-image: /assets/images/dices.png
+title: "Below the Model"
+title-up: "Below the Model"
+title-down: "You can't model your way out of bad data"
+intro: "Identity, ingestion, and why the corpus is the product — not the LLM."
+date: 2026-03-23
+image: /assets/images/explainer-1.png
 ---
 
-Yatzy is a classic dice game, often played in social settings where players try to achieve various combinations with five dice. Each round, players score points based on different categories, such as "Full House" or "Yahtzee," and at the end of the game, the scores are tallied to determine the winner. My girlfriend and I usually enjoy a few rounds every Sunday morning, and after a while, I thought it would be great to store our scores in a digital format to track our stats over time.
+I wanted a simple way to follow specific AI researchers — not a feed, not an aggregator. Something that tracks what they publish, surfaces the papers worth reading, and lets me have a real conversation with them. Not a chatbot on top of an abstract. Something that downloads the full PDF, processes it locally, and reasons about it before answering.
 
-<div class="subtitle-separator">The Problem</div>
+<div class="post-inline-image-container">
+  <img src="/assets/images/explainer-3.png" alt="Explainer's paper view" class="post-image">
+</div>
 
-<hr>
+Building it turned out to be mostly a data problem.
 
-That's when I realized I needed a system to automatically extract the scores from the images of our scorecards and save them to a CSV file for easy analysis. Here's how I tackled this project.
+The first instinct when building with LLMs is to think about the LLMs. Which model, which retrieval strategy, how to structure the prompt. That's where the interesting decisions seem to live. It's also the wrong place to start.
 
+My first attempt at ingestion went directly at ArXiv. Query by lab or institution, pull the relevant papers. The problem is that ArXiv doesn't have reliable affiliation fields. Searching for "OpenAI" returns every paper that mentions OpenAI anywhere in the text — not papers by OpenAI researchers. The signal is completely polluted. I built a scoring layer on top, trying to infer authorship from extracted metadata. When that wasn't enough, I added an LLM filtering pass. It didn't work either. And at scale it would have been expensive. I was trying to model my way out of a data problem. That doesn't work.
 
-<div class="subtitle-separator">The Exploration Phase</div>
+So I turned to Semantic Scholar and OpenAlex. Rich metadata, open APIs, broad coverage. The problem wasn't the APIs — it was what I was using them for. I needed a reliable answer to one question: which papers did this person write? That query was unreliable on both. Semantic Scholar's author search returned multiple IDs for 91% of the researchers I was tracking. The pipeline looked like it was working. It wasn't.
 
-<hr>
+The issue wasn't execution. It was that I had misunderstood the problem. Author identity and paper enrichment are fundamentally different jobs — and I'd been using the same tool for both.
 
+DBLP is hand-curated. Each researcher gets one profile, publications linked persistently across institutional changes and name variations. It lags behind recent work — that's the tradeoff — but the linkage is reliable. DBLP for identity, Semantic Scholar for enrichment. The moment I separated those two jobs, the pipeline held.
 
-I started by exploring different ways to extract text from images. I knew Optical Character Recognition (OCR) would be the key, but I quickly ran into some challenges.
+<div class="post-inline-image-container">
+  <img src="/assets/images/explainer-2.png" alt="Adding a researcher" class="post-image">
+</div>
 
-1. Google AI Vision and OCR Tools
-At first, I considered using Google's AI Vision tool, but it felt too heavy for this small-scale project. Next, I tried building an OCR system using Tesseract and PyTesseract. Unfortunately, after spending a few days configuring it, I couldn't achieve the accuracy I wanted, and the system was too slow for my needs.
+Then I found the next gap. Hundreds of papers arrived without abstracts. Not fringe papers — Chain-of-Thought Prompting, Vision Transformer, Whisper. The most foundational AI research of the last five years clustered at exactly this gap. No abstract meant the recommendation engine treated them as invisible. The system wasn't just imperfect — it was systematically blind to the most important work. That problem is still open.
 
-2. Agentic Document Extraction
-I then stumbled upon a post by Andrew Hew about the Agentic document extraction tool. I gave their API a shot, but I struggled with parsing the results. It seemed like a powerful tool, but my use case felt too lightweight for it. I still plan to investigate this further.
-
-3. Back to the Drawing Board with LLMs
-Realizing that I needed a more flexible solution, I went back to my initial idea: leveraging Large Language Models (LLMs) like ChatGPT. At the time, I was experimenting with different models, including ChatGPT, Claude 3.5, and DeepSeek via chat interfaces. I found that ChatGPT gave the best results with simple prompting. This is where the project started to gain traction.
-
-4. Google AI Studio and Gemini Models
-I was using Google AI Studio for coding assistance, and their reasoning models helped me quickly implement parts of the code. I decided to try Gemini 1.5 and 2.0 for extracting the scores, and it worked pretty well. This was the turning point in the project.
-
-5. Building the System
-With the help of Google AI Studio's reasoning models, I was able to quickly build a data parsing system. I implemented an image handler that monitors a folder where I drop images. I also had to install some packages to convert images from HEIC (since I use an iPhone) to PNG format, as Gemini handled them better this way. Lastly, I wrote a function to output the results to a CSV file.
-
-6. Handling Categories and Language Mapping
-At first, I asked Gemini to only return the scores, not the categories, but since I play with Finnish scorecards, the categories were in Nordic languages. This didn't work well, as Gemini skipped them. After modifying the prompt to include categories, I ran into another issue: translation. Instead of manually mapping the categories (Finnish -> English, Norwegian -> English), I let Gemini handle the translation. That worked much better.
-
-7. Validation Logic
-To ensure the accuracy of the scores, I added simple validation logic that checks if the upper score and the total match. If they don't, the system will prompt for confirmation. This added a layer of security against mistakes.
-
-8. Fine-Tuning Image Handling
-I wrote a short script to analyze the scores and automatically process every scoreboard image. However, Gemini struggled more with images that had empty spaces around the scoreboard, so I had to crop the images manually before adding them to the monitored folder. Eliminating this step is one of my next goals.
-
-9. Dealing with Calculation Mistakes
-Sometimes the system misinterpreted scores, especially when a number like "52" was misread as "5." In those cases, I had to edit the results manually, but most of the time, it was due to a miscalculation on our part.
-
-What's Next?
-The current version of the system works well, but there's still room for improvement. The next steps involve deploying the code somewhere so that it runs continuously without requiring manual intervention. I'd also like to add a simple user interface (UI) to make it more user-friendly.
+The corpus, the identity layer, the ingestion pipeline — that's the product. The LLM is just the interface. Swap the model out tomorrow and nothing breaks. Lose the data and there's nothing left.

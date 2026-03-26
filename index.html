@@ -4,49 +4,39 @@ title: Home
 ---
 
 <style>
-
-  .title-normal {
-    font-family: 'Exposure', sans-serif; /* Use the custom font */
-    font-weight: normal; /* Normal weight */
-}
-
-.title-bold {
-    font-family: 'Exposure', sans-serif; /* Use the custom font */
-    font-weight: bold; /* Bold weight */
+  .home-container {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-bottom: 80px;
   }
-
-  .post-title {
-    font-family: 'Exposure', sans-serif; /* Use the custom font */
-    font-weight: normal; /* Normal weight */
-    font-size: 1.4em;
-    line-height: 1.2;
-    margin-top: 0;
-  }
-
 </style>
 
-<h1 class="main-title">
-  <span class="title-normal">Welcome to </span>
-  <span class="title-bold">My Website</span>
-</h1>
+<div class="home-container">
+  <div class="intro-text-container">
+    <p class="intro-text">I'm Niko Paijola. I've spent ten years building products — first as a designer, then as a product manager — across SaaS, fintech, and AI. The work has changed, the question hasn't: what does this person actually need, and what's getting in the way.</p>
+    
+    <p class="intro-text">This site is where I publish personal projects, writing, and work-in-progress ideas.</p>
+  </div>
 
-<div class="intro-text-container">
-<p class="intro-text">Take an inside look at my work, personal projects, and occasional thoughts on things that matter to me.</p>
-</div>
-
-
-
-<div class="post-grid">
-  {% for post in site.posts %}
-    <div class="post-item">
-      <a href="{{ post.url | relative_url }}">
-        {% if post.image %}
-          <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="post-thumbnail">
-        {% endif %}
-        <div class="post-title-container">
-          <h2 class="post-title">{{ post.title }}</h2>
-        </div>
-      </a>
-    </div>
-  {% endfor %}
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li class="post-item">
+        <a href="{{ post.url | relative_url }}" class="post-card">
+          <div class="post-card-inner">
+            {% if post.image %}
+              <img src="{{ post.image | relative_url }}" alt="" class="post-card-image" width="450" height="750" loading="lazy">
+            {% else %}
+              <div class="post-card-placeholder" aria-hidden="true"></div>
+            {% endif %}
+            <div class="post-card-caption">
+              <h2 class="post-card-title">{{ post.title }}</h2>
+              {% if post.intro %}
+                <p class="post-card-intro">{{ post.intro }}</p>
+              {% endif %}
+            </div>
+          </div>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
 </div>
