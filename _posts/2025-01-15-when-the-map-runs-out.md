@@ -5,7 +5,7 @@ title-up: "When the Map Runs Out"
 title-down: "On confident models and unknown terrain"
 intro: "A satellite classifier failed spectacularly on Finnish permafrost. The failure mode is more familiar than it looks."
 date: 2025-01-15
-image: /assets/images/lapland-edit-1.jpg
+image: /assets/images/maps.png
 ---
 
 
@@ -14,7 +14,7 @@ As part of an AI course at Sorbonne University, I trained a CNN on a plant patho
 I started testing it with screenshots from Google Earth. In general it held up — forests looked like forests, residential areas came back as residential. Then I fed it an image from north of Finland. Patterned ground shaped by permafrost, polygonal soils from frost-heaving, boulder fields where almost nothing grows. The model returned Residential Buildings at 82% confidence.
 
 <div class="post-inline-image-container">
-  <img src="/assets/images/lapland-result.png" alt="Lapland classification result" class="post-image">
+  <img src="{{ '/assets/images/lapland-result.png' | relative_url }}" alt="Lapland classification result" class="post-image">
 </div>
 
 

@@ -18,13 +18,16 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: My Website
+title: Niko Paijola
 email: your-email@example.com
 description: >-
   Take an inside look at my work, personal projects, and occasional thoughts on things that matter to me.
-# For GitHub Pages deployment:
+# GitHub Pages project site (repo "website"): keep baseurl in sync with the repo name.
 baseurl: "/website"
-# For local development, run with: bundle exec jekyll serve --baseurl ''
+# Local preview at http://localhost:4000/ (not /website/) so CSS/assets resolve:
+#   bundle exec jekyll serve --baseurl ''
+#   or: bundle exec jekyll serve --config _config.yml,_config_local.yml
+# With default config only, open http://localhost:4000/website/ or links will 404.
 url: "https://kissa46.github.io"
 twitter_username: jekyllrb
 github_username:  jekyll
@@ -55,3 +58,4 @@ exclude:
   - vendor/gems/
   - vendor/ruby/
   - README.md
+  - AI.md
