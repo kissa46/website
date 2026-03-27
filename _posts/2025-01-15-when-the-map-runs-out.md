@@ -3,7 +3,7 @@ layout: post
 title: "When the Map Runs Out"
 title-up: "When the Map Runs Out"
 title-down: "On confident models and unknown terrain"
-intro: "A satellite classifier failed spectacularly on Finnish permafrost. The failure mode is more familiar than it looks."
+intro: "A satellite classifier failed spectacularly on Finnish permafrost."
 date: 2025-01-15
 image: /assets/images/maps.png
 ---
@@ -13,13 +13,12 @@ As part of an AI course at Sorbonne University, I trained a CNN on a plant patho
 
 I started testing it with screenshots from Google Earth. In general it held up — forests looked like forests, residential areas came back as residential. Then I fed it an image from north of Finland. Patterned ground shaped by permafrost, polygonal soils from frost-heaving, boulder fields where almost nothing grows. The model returned Residential Buildings at 82% confidence.
 
-<div class="post-inline-image-container">
-  <img src="{{ '/assets/images/lapland-result.png' | relative_url }}" alt="Lapland classification result" class="post-image">
-</div>
-
-
 
 The model just picked the nearest pattern it knew and committed. EuroSAT is drawn almost entirely from Central Europe. The model learned "European landscape" and had no way to represent where that map ended.
+
+<div class="post-inline-image-container">
+  <img src="{{ '/assets/images/lapland-result-bg.png' | relative_url }}" alt="Lapland classification result" class="post-image">
+</div>
 
 At least in this case I knew the dataset. I could trace the blind spot back to a concrete gap in the training distribution. It made me think about LLMs and the same class of problem at a different scale — except there, the training data is opaque, the worldview harder to audit, and the failure modes far less legible.
 

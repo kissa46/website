@@ -3,7 +3,7 @@ layout: post
 title: "Cheaper to Be Wrong"
 title-up: "Cheaper to Be Wrong"
 title-down: "Validating ideas with AI coding agents"
-intro: "Building a working prototype used to be expensive. When the cost drops, the questions you can afford to ask change."
+intro: "When the cost of a working prototype drops, the questions you can afford to ask change."
 date: 2025-08-02
 image: /assets/images/seagulls.png
 ---
@@ -15,7 +15,7 @@ The standard move would have been to test it carefully — interviews, demand si
 So instead of researching our way toward a decision, we built. I connected Airtable as a lightweight backend, wired it to a frontend, and within days there was a working prototype in front of real users. Not a mockup. Something you could hand to a landlord and watch.
 
 <div class="post-inline-image-container">
-  <img src="{{ '/assets/images/offices.png' | relative_url }}" alt="Office website" class="post-image">
+  <img src="{{ '/assets/images/offices-front-bg.png' | relative_url }}" alt="Office website" class="post-image">
 </div>
 
 
@@ -23,11 +23,11 @@ The prototype was built to test two assumptions. First: would office landlords a
 
 On the data question: the granular information exists, but it lives inside landlord systems. Surfacing it properly would require integration work on their side — not trivial. For the testing phase, we made the pragmatic call to keep it alive through manual entry. 
 
-<div class="post-inline-image-container">
-  <img src="{{ '/assets/images/offices-filter.png' | relative_url }}" alt="Office website filter page" class="post-image">
-</div>
-
 On conversion: the hypothesis that richer data would drive more inquiries was weak. The hypothesis that it would filter them was strong. Agents handling inquiries reported meaningfully lower workload — fewer back-and-forth exchanges to establish the basics.
+
+<div class="post-inline-image-container">
+  <img src="{{ '/assets/images/offices-filter-bg.png' | relative_url }}" alt="Office website filter page" class="post-image">
+</div>
 
 The client now has a real finding instead of a validated assumption. The conversion hypothesis didn't hold. What surfaced instead was a reduction in agent workload — useful, but not a business. The prototype didn't find the idea but it eliminated one path and pointed toward where to look next.
 
