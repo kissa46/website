@@ -117,6 +117,7 @@ a:hover {
 }
 
 .intro-text-container {
+    margin-top: 2.75rem;
     margin-bottom: 4.5rem;
 }
 
@@ -225,7 +226,7 @@ a:hover {
 }
 
 .post-card:hover .post-card-image {
-    transform: scale(1.03);
+    transform: scale(1.02);
 }
 
 .post-card-placeholder {
@@ -313,7 +314,7 @@ hr {
 }
 
 .header-wrapper {
-    max-width: 800px;
+    max-width: 600px;
     width: 100%;
     display: flex;
     justify-content: flex-start;
